@@ -1,0 +1,13 @@
+j:/Otros/MINE/Projects/Dryad Engine/Main/data/batch/../../..//Main/data/logs/log_20250203_20423.txt
+2025-02-03T20:42:03.395766300
+
+Started Aplication.
+Write 'help' for a list of all the commands.
+----------------
+
+>> 
+dumplogs
+Succesfuly deeleted old logs.
+----------------
+
+>> 
