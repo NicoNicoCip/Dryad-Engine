@@ -9,7 +9,7 @@ import java.time.LocalTime;
 public abstract class LogsManager {
     public static final String logFileCreationTime = getLogDateTime();
     public static final String logFolder = "/Main/data/logs/";
-    public static final String logFileHead = logFolder + "log_" + logFileCreationTime + ".txt";
+    public static final String logFileHead = logFolder + "log_" + logFileCreationTime + ".log";
     
     public static final String getLogDateTime() {
         String time = "" + LocalTime.now().getHour() + LocalTime.now().getMinute() + LocalTime.now().getSecond() ;
