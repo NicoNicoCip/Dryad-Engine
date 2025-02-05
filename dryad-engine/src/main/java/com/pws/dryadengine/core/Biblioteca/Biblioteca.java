@@ -1,12 +1,12 @@
-package main.java.com.pws.dryadengine.core.Biblioteca;
+package com.pws.dryadengine.core.Biblioteca;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import main.java.com.pws.dryadengine.func.Debug;
-import main.java.com.pws.dryadengine.func.ID;
+import com.pws.dryadengine.func.Debug;
+import com.pws.dryadengine.func.ID;
 
 public class Biblioteca extends Object{
     private final ID id = new ID(5);

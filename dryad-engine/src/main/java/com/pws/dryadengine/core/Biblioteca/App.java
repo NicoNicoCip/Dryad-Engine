@@ -1,14 +1,14 @@
-package main.java.com.pws.dryadengine.core.Biblioteca;
+package com.pws.dryadengine.core.Biblioteca;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import main.java.com.pws.dryadengine.func.Debug;
-import main.java.com.pws.dryadengine.func.FileManager;
-import main.java.com.pws.dryadengine.func.ID;
-import main.java.com.pws.dryadengine.func.LogsManager;
-import main.java.com.pws.dryadengine.func.Biblioteca.CommandPallete;
+import com.pws.dryadengine.func.Debug;
+import com.pws.dryadengine.func.FileManager;
+import com.pws.dryadengine.func.ID;
+import com.pws.dryadengine.func.LogsManager;
+import com.pws.dryadengine.func.Biblioteca.CommandPallete;
 
 public class App {
     private static final ID id = new ID(0);

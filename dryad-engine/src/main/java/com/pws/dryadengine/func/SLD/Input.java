@@ -1,4 +1,4 @@
-package main.java.com.pws.dryadengine.func.SLD;
+package com.pws.dryadengine.func.SLD;
 import static io.github.libsdl4j.api.event.SDL_EventType.SDL_KEYDOWN;
 import static io.github.libsdl4j.api.event.SDL_EventType.SDL_KEYUP;
 import static io.github.libsdl4j.api.event.SdlEvents.SDL_PollEvent;

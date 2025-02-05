@@ -9,7 +9,6 @@
   <version>1.0</version>
 
   <name>driad-engine</name>
-  <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
@@ -24,6 +23,12 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.github.libsdl4j</groupId>
+      <artifactId>libsdl4j</artifactId>
+      <version>2.28.4-1.6</version>
     </dependency>
   </dependencies>
 
@@ -71,5 +76,15 @@
         </plugin>
       </plugins>
     </pluginManagement>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>15</source>
+                  <target>15</target>
+              </configuration>
+          </plugin>
+      </plugins>
   </build>
 </project>

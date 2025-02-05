@@ -83,7 +83,7 @@ echo ---------------------------------------Starting Engine---------------------
 cls
 
 :: Run the main class from the bin directory, including external libraries
-java -cp "%BIN_DIR%;%CLASSPATH%" main.java.com.pws.dryadengine.core.App
+java -cp "%BIN_DIR%;%CLASSPATH%" com.pws.dryadengine.core.App
 
 if %ERRORLEVEL% neq 0 (
     echo Execution failed. Aborting.

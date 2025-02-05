@@ -1,20 +1,25 @@
-package main.java.com.pws.dryadengine.types.drawing;
+package com.pws.dryadengine.types;
 
 public class Color {
     private byte r;
     private byte g;
     private byte b;
+    private byte a;
 
     public byte getR() {
-        return r;
+        return this.r;
     }
 
     public byte getG() {
-        return g;
+        return this.g;
     }
     
     public byte getB() {
-        return b;
+        return this.b;
+    }
+
+    public byte getA() {
+        return this.a;
     }
 
     public void setR(byte r) {
@@ -29,7 +34,11 @@ public class Color {
         this.b = b;
     }
 
-    public static Color getHSBColor(float hue, float saturation, float brightness) {
+    public void setA(byte a) {
+        this.a = a;
+    }
+
+    public static Color getHSBColor(float hue, float saturation, float brightness, byte alpha) {
         Color color = new Color();
         
         // Constrain input values
@@ -59,6 +68,7 @@ public class Color {
         color.setR((byte)Math.round((r + m) * 255));
         color.setG((byte)Math.round((g + m) * 255));
         color.setB((byte)Math.round((b + m) * 255));
+        color.setA(alpha);
         
         return color;
     }

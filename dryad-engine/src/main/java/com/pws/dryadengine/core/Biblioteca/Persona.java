@@ -1,4 +1,4 @@
-package main.java.com.pws.dryadengine.core.Biblioteca;
+package com.pws.dryadengine.core.Biblioteca;
 
 import java.time.LocalDate;
 

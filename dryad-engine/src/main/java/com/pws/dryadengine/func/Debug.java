@@ -1,4 +1,4 @@
-package main.java.com.pws.dryadengine.func;
+package com.pws.dryadengine.func;
 
 public abstract class Debug {
     public static final <T> void print(T toPrint) {

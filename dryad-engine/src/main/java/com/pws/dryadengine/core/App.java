@@ -1,6 +1,6 @@
-package main.java.com.pws.dryadengine.core;
+package com.pws.dryadengine.core;
 
-import main.java.com.pws.dryadengine.func.LogsManager;
+import com.pws.dryadengine.func.LogsManager;
 
 public class App {
     @SuppressWarnings("unused")

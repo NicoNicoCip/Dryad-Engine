@@ -1,8 +1,8 @@
-package main.java.com.pws.dryadengine.func;
+package com.pws.dryadengine.func;
 
 import java.io.File;
 
-import main.java.com.pws.dryadengine.core.App;
+import com.pws.dryadengine.core.App;
 
 public abstract class CommandPallete {
     public static boolean runCommand(String command) {

@@ -1,15 +1,20 @@
-package main.java.com.pws.dryadengine.func.SLD;
+package com.pws.dryadengine.func.SLD;
 
 import io.github.libsdl4j.api.event.SDL_Event;
+import io.github.libsdl4j.api.rect.SDL_Rect;
 import io.github.libsdl4j.api.render.SDL_Renderer;
 import io.github.libsdl4j.api.video.SDL_Window;
-import main.java.com.pws.dryadengine.core.App;
-import main.java.com.pws.dryadengine.func.LogsManager;
+import com.pws.dryadengine.core.App;
+import com.pws.dryadengine.func.LogsManager;
+import com.pws.dryadengine.types.Color;
 
 import static io.github.libsdl4j.api.Sdl.SDL_Init;
 import static io.github.libsdl4j.api.error.SdlError.SDL_GetError;
 import static io.github.libsdl4j.api.event.SdlEvents.SDL_PollEvent;
 import static io.github.libsdl4j.api.video.SdlVideo.SDL_CreateWindow;
+
+import com.pws.dryadengine.types.Vector2;
+
 import static io.github.libsdl4j.api.event.SDL_EventType.*;
 import static io.github.libsdl4j.api.render.SdlRender.*;
 
@@ -39,6 +44,15 @@ public class Window {
             LogsManager.logErrors( new IllegalStateException("Unable to create SDL renderer: " + SDL_GetError()));
         }
         return renderer;
+    }
+
+    public static final SDL_Rect createRect(Vector2 pos, Vector2 size) {
+        SDL_Rect rect = new SDL_Rect();
+        rect.x = pos.getX().intValue();
+        rect.y = pos.getY().intValue();
+        rect.w = size.getX().intValue();
+        rect.h = size.getX().intValue();
+        return rect;
     }
 
     public static final void checkForEndOfProgram() {

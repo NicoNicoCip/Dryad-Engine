@@ -1,4 +1,4 @@
-package main.java.com.pws.dryadengine.types.math;
+package com.pws.dryadengine.types;
 
 public class Vector3 {
     private Number x;

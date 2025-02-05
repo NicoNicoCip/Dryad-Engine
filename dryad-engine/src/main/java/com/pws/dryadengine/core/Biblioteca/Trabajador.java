@@ -1,8 +1,8 @@
-package main.java.com.pws.dryadengine.core.Biblioteca;
+package com.pws.dryadengine.core.Biblioteca;
 
 import java.time.LocalDate;
 
-import main.java.com.pws.dryadengine.func.ID;
+import com.pws.dryadengine.func.ID;
 
 public class Trabajador extends Persona{
     private final ID id = new ID(3);

@@ -1,10 +1,10 @@
-package main.java.com.pws.dryadengine.core;
+package com.pws.dryadengine.core;
 
 import java.util.Scanner;
 
-import main.java.com.pws.dryadengine.func.CommandPallete;
-import main.java.com.pws.dryadengine.func.Debug;
-import main.java.com.pws.dryadengine.func.LogsManager;
+import com.pws.dryadengine.func.CommandPallete;
+import com.pws.dryadengine.func.Debug;
+import com.pws.dryadengine.func.LogsManager;
 
 public class BackendEnv implements Runnable {
 

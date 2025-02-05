@@ -3,12 +3,12 @@
         "dryad-engine\\src"
     ],
     "java.project.referencedLibraries": [
-        "dryad-engine\\lib\\annotations-23.0.0.jar",
-        "dryad-engine\\lib\\jna-5.16.0.jar",
-        "dryad-engine\\lib\\jna-platform-5.16.0.jar",
-        "dryad-engine\\lib\\junit-platform-console-standalone-1.11.4.jar",
-        "dryad-engine\\lib\\libsdl4j-2.28.4-1.6.jar",
-        "dryad-engine\\lib\\slf4j-api-1.7.36.jar"
+        "c:\\Repos\\Java\\Dryad-Engine\\dryad-engine\\lib\\annotations-23.0.0.jar",
+        "c:\\Repos\\Java\\Dryad-Engine\\dryad-engine\\lib\\slf4j-api-1.7.36.jar",
+        "c:\\Repos\\Java\\Dryad-Engine\\dryad-engine\\lib\\libsdl4j-2.28.4-1.6.jar",
+        "c:\\Repos\\Java\\Dryad-Engine\\dryad-engine\\lib\\jna-platform-5.16.0.jar",
+        "c:\\Repos\\Java\\Dryad-Engine\\dryad-engine\\lib\\junit-platform-console-standalone-1.11.4.jar",
+        "c:\\Repos\\Java\\Dryad-Engine\\dryad-engine\\lib\\jna-5.16.0.jar"
     ],
     "java.configuration.updateBuildConfiguration": "interactive",
     "java.project.outputPath": "dryad-engine\\bin",

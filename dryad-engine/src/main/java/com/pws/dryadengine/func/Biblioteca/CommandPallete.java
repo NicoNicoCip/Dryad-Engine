@@ -1,17 +1,17 @@
-package main.java.com.pws.dryadengine.func.Biblioteca;
+package com.pws.dryadengine.func.Biblioteca;
 
 import java.io.File;
 import java.time.LocalDate;
 
-import main.java.com.pws.dryadengine.core.Biblioteca.App;
-import main.java.com.pws.dryadengine.core.Biblioteca.Biblioteca;
-import main.java.com.pws.dryadengine.core.Biblioteca.Libro;
-import main.java.com.pws.dryadengine.core.Biblioteca.Reserva;
-import main.java.com.pws.dryadengine.core.Biblioteca.Trabajador;
-import main.java.com.pws.dryadengine.core.Biblioteca.Usuario;
-import main.java.com.pws.dryadengine.func.Debug;
-import main.java.com.pws.dryadengine.func.FileManager;
-import main.java.com.pws.dryadengine.func.LogsManager;
+import com.pws.dryadengine.core.Biblioteca.App;
+import com.pws.dryadengine.core.Biblioteca.Biblioteca;
+import com.pws.dryadengine.core.Biblioteca.Libro;
+import com.pws.dryadengine.core.Biblioteca.Reserva;
+import com.pws.dryadengine.core.Biblioteca.Trabajador;
+import com.pws.dryadengine.core.Biblioteca.Usuario;
+import com.pws.dryadengine.func.Debug;
+import com.pws.dryadengine.func.FileManager;
+import com.pws.dryadengine.func.LogsManager;
 
 public abstract class CommandPallete {
     public static boolean runCommand(String command) {
