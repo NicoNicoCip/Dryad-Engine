@@ -11,19 +11,19 @@ public abstract class LogsManager {
     public static final String logFolder = "data/logs/";
     public static final String logFileHead = logFolder + "log_" + logFileCreationTime + ".log";
     
-    public static final String getLogDateTime() {
+    public static String getLogDateTime() {
         String time = "" + LocalTime.now().getHour() + LocalTime.now().getMinute() + LocalTime.now().getSecond() ;
         String date = LocalDate.now().toString().replace("-", "");
-        return "" + date + "_" + time;
+        return date + "_" + time;
     }
 
-    public static final void createLogFile() {
+    public static void createLogFile() {
         File f = FileManager.createFile(logFileHead);
         FileManager.writeToFile(f , FileManager.getLocalRoute() + logFileHead + "\n", true);
         FileManager.writeToFile(f , LocalDateTime.now().toString() + "\n", true);
     }
 
-    public static final void deleteAllFile() {
+    public static void deleteAllFile() {
         String data = FileManager.readFromFile(logFileHead);
         for (File fileEntry : new File(FileManager.getLocalRoute() + logFolder).listFiles()) {
             FileManager.deleteFile(logFolder + fileEntry.getName());
@@ -33,7 +33,7 @@ public abstract class LogsManager {
         Debug.println("Succesfuly deeleted old logs.");
     }
 
-    public static final void log(String data) {
+    public static void log(String data) {
         try {
             FileWriter writer = new FileWriter(FileManager.getLocalRoute() + logFileHead,true);
             writer.write("\n" + data);

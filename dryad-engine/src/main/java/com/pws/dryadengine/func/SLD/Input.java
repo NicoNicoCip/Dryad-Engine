@@ -1,11 +1,41 @@
 package com.pws.dryadengine.func.SLD;
-import static io.github.libsdl4j.api.event.SDL_EventType.SDL_KEYDOWN;
-import static io.github.libsdl4j.api.event.SDL_EventType.SDL_KEYUP;
-import static io.github.libsdl4j.api.event.SdlEvents.SDL_PollEvent;
+
 import static io.github.libsdl4j.api.keycode.SdlKeycode.SDL_SCANCODE_TO_KEYCODE;
 import static io.github.libsdl4j.api.scancode.SDL_Scancode.*;
 
+import java.util.HashMap;
+
 public abstract class Input {
+
+    public static HashMap<Integer, State> keys = new HashMap<>();
+
+    public static void addKey(int code, State state) {
+        keys.put(code, state);
+    }
+
+    public static boolean checkKey(int code, State state) {
+        if(keys.get(code) == null)
+            return false;
+        else if(keys.get(code) == State.pressed) {
+            keys.put(code, State.held);
+            return true;
+        } else if(keys.get(code) == State.released) {
+            keys.remove(code);
+            return true;
+        }
+
+        if(keys.get(code) == state)
+            return true;
+        else
+            return false;
+    }
+
+    public static enum State {
+        pressed,
+        held,
+        released
+    }
+
     public static final int _none = 0;
     public static final int _return = '\r';
     public static final int _escape = '\u001B';
@@ -264,18 +294,4 @@ public abstract class Input {
     public static final int _softright = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_SOFTRIGHT);
     public static final int _call = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_CALL);
     public static final int _endcall = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_ENDCALL);
-
-    public static final boolean isPressed(int key) {
-        if(SDL_PollEvent(Window.evt) != 0 && Window.evt.type == SDL_KEYDOWN)
-            return Window.evt.key.keysym.sym == key;
-        else
-            return false;
-    }
-
-    public static final boolean isReleased(int key) {
-        if(SDL_PollEvent(Window.evt) != 0 && Window.evt.type == SDL_KEYUP)
-            return Window.evt.key.keysym.sym == key;
-        else
-            return false;
-    }
 }

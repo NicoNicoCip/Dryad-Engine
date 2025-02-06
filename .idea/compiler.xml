@@ -9,5 +9,8 @@
         <module name="dryad-engine" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dryad-engine" target="15" />
+    </bytecodeTargetLevel>
   </component>
 </project>

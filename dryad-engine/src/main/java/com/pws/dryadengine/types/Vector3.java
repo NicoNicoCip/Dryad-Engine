@@ -1,38 +1,14 @@
 package com.pws.dryadengine.types;
 
 public class Vector3 {
-    private Number x;
-    private Number y;
-    private Number z;
-
-    public Number getX() {
-        return x;
-    }
-
-    public Number getY() {
-        return y;
-    }
-
-    public Number getZ() {
-        return z;
-    }
-    
-    public void setX(Number x) {
-        this.x = x;
-    }
-
-    public void setY(Number y) {
-        this.y = y;
-    }
-
-    public void setZ(Number z) {
-        this.z = z;
-    }
+    public float x;
+    public float y;
+    public float z;
 
     public Vector3() {
     }
 
-    public Vector3(Number x, Number y, Number z) {
+    public Vector3(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -45,6 +21,6 @@ public class Vector3 {
     }
 
     public String toData(){
-        return "(" + getX() + "," + getY() + "," + getZ() + ")";
+        return "(" + this.x + "," + this.y + "," + this.z + ")";
     }
 }
