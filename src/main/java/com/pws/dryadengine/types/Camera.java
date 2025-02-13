@@ -1,32 +1,29 @@
 package main.java.com.pws.dryadengine.types;
 
-public class Camera extends Node2D {
-    public boolean focused = false;
-    // position defines the position in of the camera in relation to the world
-    // scale defines how zoomed in it is.
-    public Node2D followNode;
+import main.java.com.pws.dryadengine.func.Window;
 
-    public Camera() {
+public class Camera extends Node {
+    public float zoom = 1.0f;
+    public Vector2 offset = new Vector2();
+    public boolean center;
+    public boolean follow;
+    private Node root;
 
+    private Vector2 getViewOffset() {
+        if(center) offset = new Vector2(-Window.scale.x/2 + this.parent.size.x / 2, -Window.scale.y/2 + this.parent.size.y / 2);
+        if(follow) position = this.parent.position;
+
+        return new Vector2(-position.x - offset.x, -position.y - offset.y);
     }
 
-    public Camera(boolean focused) {
-        this.focused = focused;
+    public void update() {
+        if(root == null) root = this.getRoot();
+        root.position = getViewOffset();
     }
 
-    public Camera(boolean focused, Node2D followNode) {
-        this.focused = focused;
-        this.followNode = followNode;
-    }
-
-    public void updateCamera(Node2D root) {
-        if(this.focused) {
-            root.position.x = -this.position.x;
-            root.position.y = -this.position.y;
-
-            if(followNode != null) {
-                followNode.position = new Vector2(this.getGlobalPosition());
-            }
-        }
+    public void updateLerped(float amount) {
+        if(root == null) root = this.getRoot();
+        root.position = root.position.follow( getViewOffset(), amount);
     }
 }
+

@@ -4,7 +4,7 @@ import main.java.com.pws.dryadengine.func.LogsManager;
 
 public class App {
     @SuppressWarnings("unused")
-    private static final String version = "0.1.3";
+    private static final String version = "0.1.5";
 
     public static volatile boolean finnishExecution = false;
     public static final String saveFileFolder = "data/saves/";

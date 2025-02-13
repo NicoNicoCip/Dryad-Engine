@@ -94,4 +94,12 @@ public class Vector2 {
         float cosTheta = dotProduct / lengthsMultiplied;
         return (float) Math.acos(Math.max(-1, Math.min(1, cosTheta))); // Clamp value for precision errors
     }
+
+    // Return a new Vector2 that is 'percentage' percent between this vector and target
+    public Vector2 follow(Vector2 target, float percentage) {
+        percentage = Math.max(0, Math.min(1, percentage)); // Clamp percentage between 0 and 1
+        float newX = this.x + (target.x - this.x) * percentage;
+        float newY = this.y + (target.y - this.y) * percentage;
+        return new Vector2(newX, newY);
+    }
 }
