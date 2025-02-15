@@ -1,5 +1,6 @@
 package main.java.com.pws.dryadengine.core;
 
+import main.java.com.pws.dryadengine.core.scripts.ScriptManager;
 import main.java.com.pws.dryadengine.func.Input;
 import main.java.com.pws.dryadengine.func.Window;
 
@@ -32,7 +33,7 @@ public class FrontendEnv implements Runnable {
         
         root.addChild(player);
         root.addChild(ground);
-
+        
         cm.addCollider(collider1);
         cm.addCollider(collider2);
 
@@ -62,13 +63,12 @@ public class FrontendEnv implements Runnable {
             if (Input.checkKey(Input._d,Input.State.held))      { player.position.x+= moveSpeed;}
 
             cm.resolveCollisions();
-
             Window.clear();
             
             cam.updateLerped(0.01f);
             player.updateRect();
             ground.updateRect();
-            center.updateRect();
+            center.updateRect(); 
             
             Window.drawBackground();
             Window.print();
@@ -77,6 +77,11 @@ public class FrontendEnv implements Runnable {
 
     @Override
     public void run() {
-        testCode();
+        try {
+            ScriptManager.create();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
 }

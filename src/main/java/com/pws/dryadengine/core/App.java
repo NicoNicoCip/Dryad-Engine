@@ -4,10 +4,11 @@ import main.java.com.pws.dryadengine.func.LogsManager;
 
 public class App {
     @SuppressWarnings("unused")
-    private static final String version = "0.1.5";
+    private static final String version = "0.1.6";
 
     public static volatile boolean finnishExecution = false;
     public static final String saveFileFolder = "data/saves/";
+    public static final String executionFolder = "src/main/java";
     public static final Thread backend = new Thread(new BackendEnv());
     public static final Thread frontend = new Thread(new FrontendEnv());
     

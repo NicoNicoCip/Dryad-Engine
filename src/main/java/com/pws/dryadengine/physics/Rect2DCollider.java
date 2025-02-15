@@ -8,6 +8,7 @@ public class Rect2DCollider extends Node {
     private ColliderType type;
 
     public Rect2DCollider(Rect2D rect, ColliderType type) {
+        super();
         this.rect = rect;
         this.type = type;
     }

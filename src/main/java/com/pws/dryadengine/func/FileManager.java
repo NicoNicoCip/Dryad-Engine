@@ -65,6 +65,23 @@ public abstract class FileManager {
         }
     }
 
+    public static final String readFromFile(File file) {
+        try {
+            String out = "";
+            Scanner scan = new Scanner(file);
+            while (scan.hasNextLine()) {
+                out += scan.nextLine() + "\n";
+            }
+            scan.close();
+
+            out = out.substring(0, out.length()-1);
+            return out;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
+
     public static final boolean deleteFile(String route) {
         try {
             File file = new File(getLocalRoute(), route);

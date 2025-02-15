@@ -57,10 +57,10 @@ public class CollisionManager {
         Rect2D rectA = a.getRect();
         Rect2D rectB = b.getRect();
     
-        return rectA.position.x < rectB.position.x + rectB.size.x &&
-               rectA.position.x + rectA.size.x > rectB.position.x &&
-               rectA.position.y < rectB.position.y + rectB.size.y &&
-               rectA.position.y + rectA.size.y > rectB.position.y;
+        return rectA.position.x < rectB.position.x + rectB.scale.x &&
+               rectA.position.x + rectA.scale.x > rectB.position.x &&
+               rectA.position.y < rectB.position.y + rectB.scale.y &&
+               rectA.position.y + rectA.scale.y > rectB.position.y;
     }
     
     private void separateColliders(Rect2DCollider a, Rect2DCollider b) {
@@ -80,10 +80,10 @@ public class CollisionManager {
         Rect2D rectA = dynamic.getRect();
         Rect2D rectB = staticCollider.getRect();
     
-        float overlapX = Math.min(rectA.position.x + rectA.size.x - rectB.position.x,
-                                  rectB.position.x + rectB.size.x - rectA.position.x);
-        float overlapY = Math.min(rectA.position.y + rectA.size.y - rectB.position.y,
-                                  rectB.position.y + rectB.size.y - rectA.position.y);
+        float overlapX = Math.min(rectA.position.x + rectA.scale.x - rectB.position.x,
+                                  rectB.position.x + rectB.scale.x - rectA.position.x);
+        float overlapY = Math.min(rectA.position.y + rectA.scale.y - rectB.position.y,
+                                  rectB.position.y + rectB.scale.y - rectA.position.y);
     
         if (overlapX < overlapY) {
             if (rectA.position.x < rectB.position.x) {
@@ -104,10 +104,10 @@ public class CollisionManager {
         Rect2D rectA = a.getRect();
         Rect2D rectB = b.getRect();
     
-        float overlapX = Math.min(rectA.position.x + rectA.size.x - rectB.position.x,
-                                  rectB.position.x + rectB.size.x - rectA.position.x);
-        float overlapY = Math.min(rectA.position.y + rectA.size.y - rectB.position.y,
-                                  rectB.position.y + rectB.size.y - rectA.position.y);
+        float overlapX = Math.min(rectA.position.x + rectA.scale.x - rectB.position.x,
+                                  rectB.position.x + rectB.scale.x - rectA.position.x);
+        float overlapY = Math.min(rectA.position.y + rectA.scale.y - rectB.position.y,
+                                  rectB.position.y + rectB.scale.y - rectA.position.y);
     
         if (overlapX < overlapY) {
             if (rectA.position.x < rectB.position.x) {

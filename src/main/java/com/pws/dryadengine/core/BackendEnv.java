@@ -12,7 +12,6 @@ public class BackendEnv implements Runnable {
     public void run() {
         try {
             Scanner scan = new Scanner(System.in);
-            
             LogsManager.createLogFile();
             Debug.println("Started Aplication.");
             Debug.println("Write 'help' for a list of all the commands.");

@@ -102,4 +102,8 @@ public class Vector2 {
         float newY = this.y + (target.y - this.y) * percentage;
         return new Vector2(newX, newY);
     }
+
+    public Vector3 toVector3() {
+        return new Vector3(x, y, 0);
+    }
 }

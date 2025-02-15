@@ -49,9 +49,9 @@ public class QuadTree {
     private int getIndex(Rect2DCollider collider) {
         Rect2D rect = collider.getRect();
         boolean top = rect.position.y < y + height / 2;
-        boolean bottom = rect.position.y + rect.size.y > y + height / 2;
+        boolean bottom = rect.position.y + rect.scale.y > y + height / 2;
         boolean left = rect.position.x < x + width / 2;
-        boolean right = rect.position.x + rect.size.x > x + width / 2;
+        boolean right = rect.position.x + rect.scale.x > x + width / 2;
 
         if (top && right) return 0;
         if (top && left) return 1;
