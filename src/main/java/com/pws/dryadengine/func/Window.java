@@ -8,9 +8,11 @@ import io.github.libsdl4j.api.video.SDL_Window;
 import main.java.com.pws.dryadengine.core.App;
 
 import static io.github.libsdl4j.api.Sdl.SDL_Init;
+import static io.github.libsdl4j.api.Sdl.SDL_Quit;
 import static io.github.libsdl4j.api.error.SdlError.SDL_GetError;
 import static io.github.libsdl4j.api.event.SdlEvents.SDL_PollEvent;
 import static io.github.libsdl4j.api.video.SdlVideo.SDL_CreateWindow;
+import static io.github.libsdl4j.api.video.SdlVideo.SDL_DestroyWindow;
 import static io.github.libsdl4j.api.video.SdlVideo.SDL_GetWindowPosition;
 import static io.github.libsdl4j.api.video.SdlVideo.SDL_GetWindowSizeInPixels;
 
@@ -78,6 +80,12 @@ public class Window {
 
     public static void print() {
         SDL_RenderPresent(rd);
+    }
+
+    public static void end() {
+        SDL_DestroyRenderer(rd);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
     }
 
     public static void runEvents() {

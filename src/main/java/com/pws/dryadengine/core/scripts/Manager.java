@@ -4,15 +4,21 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import main.java.com.pws.dryadengine.core.App;
+import main.java.com.pws.dryadengine.func.Debug;
+import main.java.com.pws.dryadengine.func.Window;
+import main.java.com.pws.dryadengine.types.Color;
 
-public class ScriptManager {
+public class Manager {
     private static List<Script> scripts = new ArrayList<>();
     private static boolean changeListFlag = false;
     private static int[] scriptExecution = new int[] {0};
     private static List<Script> loadedScripts = new ArrayList<>();
+
     static {
         load();
     }
@@ -55,18 +61,6 @@ public class ScriptManager {
             }
         }
     }
-   
-    private static List<Script> changescriptExecution(int[] pcList) {
-        List<Script> out = scripts;
-        for (int i = 0; i < pcList.length; i++) {
-            for (int j = 0; j < scripts.size(); j++) {
-                if(scripts.get(j).pc == pcList[i]) {
-                    out.add(scripts.get(j));
-                }
-            }
-        }
-        return out;
-    }
 
     public static void replant(int... newOrder) {
         changeListFlag = true;
@@ -74,31 +68,51 @@ public class ScriptManager {
     }
 
     public static void create() throws Exception {
-        // initialize the scene list, to reflect their pcs.
-        scripts.sort((a, b) -> {
-            if (a.pc == -1 && b.pc == -1) return 0;
-            if (a.pc == -1) return -1;
-            if (b.pc == -1) return 1;
-            return Integer.compare(a.pc, b.pc);
-        });
-
-        while(!App.finnishExecution) {
+        // Initialize all scripts with PC values
+        for (Script script : scripts) {
+            script.setPC();
+        }
+    
+        // Sort scripts by PC value
+        Collections.sort(scripts, Comparator.comparingInt(script -> script.pc));
+    
+        while (!App.finnishExecution) {
             loadedScripts.clear();
-            loadedScripts.addAll(changescriptExecution(scriptExecution));
             
+            // Only add scripts that match the current execution order
+            for (int pc : scriptExecution) {
+                scripts.stream()
+                      .filter(s -> s.pc == pc)
+                      .forEach(loadedScripts::add);
+            }
+
+            Window.create("Test Platformer", 200, 200, 1280, 720);
+            Window.setBackgroundColor(new Color(255, 255, 255, 0));
+    
+            // Plant phase
             for (Script script : loadedScripts) {
                 script.plant();
             }
-
+    
             changeListFlag = false;
+    
+            // Grow phase
+            while (!changeListFlag) {
+                Window.runEvents();
+                Window.clear();
 
-            while(!changeListFlag) {
                 for (Script script : loadedScripts) {
                     script.grow();
                 }
+
+                Window.drawBackground();
+                Window.print();
             }
         }
+
+        Window.end();
     }
+    
 
     public static void addscript(Script toadd) {
         scripts.add(toadd);
