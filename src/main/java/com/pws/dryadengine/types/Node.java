@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Node{
     public Vector3 position = new Vector3(0, 0, 0);
+    public Vector3 origin = new Vector3(0, 0, 0);
     public Euler rotation = new Euler(0, 0, 0);
     public Vector3 scale = new Vector3(1, 1, 1);
 

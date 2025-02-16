@@ -1,34 +1,42 @@
 package main.java.com.pws.dryadengine.scripts;
 
-import static io.github.libsdl4j.api.render.SdlRender.SDL_RenderDrawLines;
-import static io.github.libsdl4j.api.render.SdlRender.SDL_RenderPresent;
-import static io.github.libsdl4j.api.render.SdlRender.SDL_SetRenderDrawColor;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.libsdl4j.api.rect.SDL_Point;
 import main.java.com.pws.dryadengine.core.scripts.Script;
-import main.java.com.pws.dryadengine.func.Window;
+import main.java.com.pws.dryadengine.types.Color;
+import main.java.com.pws.dryadengine.types.Mesh;
+import main.java.com.pws.dryadengine.types.Vector3;
+import main.java.com.pws.dryadengine.types.Vertex;
 
 public class TriangleTest extends Script {
-    List<SDL_Point> points = new ArrayList<>();
+    List<Vertex> verts = new ArrayList<>();
+    Mesh mesh = new Mesh();
 
     @Override
     public void setPC() {
-        this.pc = 0;
+        this.pc = -1;
     }
 
     @Override
     public void plant() {
-        points.add(new SDL_Point(400, 100)); // Top
-        points.add(new SDL_Point(200, 500)); // Bottom left
-        points.add(new SDL_Point(600, 500)); // Bottom right
-        points.add(new SDL_Point(400, 100)); // Back to top to close the triangle
+        Vertex v1 = new Vertex(new Vector3(0,0,0), new Color(255, 0, 0, 255));
+        Vertex v2 = new Vertex(new Vector3(100,0,0), new Color(255, 0, 0, 255));
+        Vertex v3 = new Vertex(new Vector3(0,100,0), new Color(255, 0, 0, 255));
+        Vertex v4 = new Vertex(new Vector3(100,100,0), new Color(255, 0, 0, 255));
+        
+        verts.add(v1);
+        verts.add(v3);
+        verts.add(v4);
+
+        verts.add(v1);
+        verts.add(v4);
+        verts.add(v2);
     }
 
     @Override
     public void grow() {
-        SDL_RenderDrawLines(Window.rd,points);
+
+        mesh.updateMesh(verts);
     }
 }

@@ -56,9 +56,15 @@ public class Vector2 {
     }
 
     // Scalar multiplication
-    public Vector2 multiply(float scalar) {
+    public Vector2 scalar(float scalar) {
         return new Vector2(this.x * scalar, this.y * scalar);
     }
+
+    // Scalar multiplication
+    public Vector2 multiply(Vector3 other) {
+        return new Vector2(this.x * other.x, this.y * other.z);
+    }
+
 
     // Dot product of two vectors
     public float dot(Vector2 other) {

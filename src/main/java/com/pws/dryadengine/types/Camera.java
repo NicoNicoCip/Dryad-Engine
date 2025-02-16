@@ -10,7 +10,7 @@ public class Camera extends Node {
     private Node root;
 
     private Vector2 getViewOffset() {
-        if(center) offset = new Vector2(-Window.scale.x/2 + this.parent.scale.x / 2, -Window.scale.y/2 + this.parent.scale.y / 2);
+        if(center) offset = Window.scale.scalar(-0.5f);
         if(follow) position = this.parent.position;
 
         return new Vector2(-position.x - offset.x, -position.y - offset.y);

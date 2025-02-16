@@ -54,8 +54,13 @@ public class Vector3 {
     }
 
     // Scalar multiplication
-    public Vector3 multiply(float scalar) {
+    public Vector3 scalar(float scalar) {
         return new Vector3(this.x * scalar, this.y * scalar, this.z * scalar);
+    }
+
+    // Scalar multiplication
+    public Vector3 multiply(Vector3 other) {
+        return new Vector3(this.x * other.x, this.y * other.z, this.z * other.z);
     }
 
     // Dot product

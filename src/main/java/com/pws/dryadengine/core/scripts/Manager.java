@@ -9,9 +9,10 @@ import java.util.Comparator;
 import java.util.List;
 
 import main.java.com.pws.dryadengine.core.App;
-import main.java.com.pws.dryadengine.func.Debug;
 import main.java.com.pws.dryadengine.func.Window;
+import main.java.com.pws.dryadengine.physics.CollisionManager_Rect2D;
 import main.java.com.pws.dryadengine.types.Color;
+import main.java.com.pws.dryadengine.types.Vector2;
 
 public class Manager {
     private static List<Script> scripts = new ArrayList<>();
@@ -34,29 +35,25 @@ public class Manager {
         }
     }
 
-    private static void getFilesRecursive(File pFile) {
+    private static void getFilesRecursive(File pFile) throws Exception {
         for(File files : pFile.listFiles()){
             if(files.isDirectory()){
                 getFilesRecursive(files);
             } else {
-                try {
-                    String data = Files.readString(Paths.get(files.getAbsolutePath()));
-                    if(!data.contains("extends Script")) continue;
-                    
-                    String pazz = data.split("package ")[1].split(";")[0];
-                    String clazz = data.split("class ")[1].split(" ")[0];
-                    
-                    // The corrected instantiation code
-                    String fullClassName = pazz + "." + clazz;
-                    Class<?> loadedClass = Class.forName(fullClassName);
-                    if (Script.class.isAssignableFrom(loadedClass)) {
-                        @SuppressWarnings("unchecked")
-                        Class<? extends Script> scriptClass = (Class<? extends Script>) loadedClass;
-                        Script scriptInstance = scriptClass.getDeclaredConstructor().newInstance();
-                        scripts.add(scriptInstance);
-                    }
-                } catch(Exception e) {
-                    e.printStackTrace();
+                String data = Files.readString(Paths.get(files.getAbsolutePath()));
+                if(!data.contains("extends Script")) continue;
+                
+                String pazz = data.split("package ")[1].split(";")[0];
+                String clazz = data.split("class ")[1].split(" ")[0];
+                
+                // The corrected instantiation code
+                String fullClassName = pazz + "." + clazz;
+                Class<?> loadedClass = Class.forName(fullClassName);
+                if (Script.class.isAssignableFrom(loadedClass)) {
+                    @SuppressWarnings("unchecked")
+                    Class<? extends Script> scriptClass = (Class<? extends Script>) loadedClass;
+                    Script scriptInstance = scriptClass.getDeclaredConstructor().newInstance();
+                    scripts.add(scriptInstance);
                 }
             }
         }
@@ -75,7 +72,12 @@ public class Manager {
     
         // Sort scripts by PC value
         Collections.sort(scripts, Comparator.comparingInt(script -> script.pc));
-    
+        Window.title = "Test Platformer";
+        Window.position = new Vector2(200, 200);
+        Window.scale = new Vector2(1280, 720);
+        Window.setBackgroundColor(new Color(255, 255, 255, 0));
+        Window.updateWindow();
+
         while (!App.finnishExecution) {
             loadedScripts.clear();
             
@@ -85,9 +87,6 @@ public class Manager {
                       .filter(s -> s.pc == pc)
                       .forEach(loadedScripts::add);
             }
-
-            Window.create("Test Platformer", 200, 200, 1280, 720);
-            Window.setBackgroundColor(new Color(255, 255, 255, 0));
     
             // Plant phase
             for (Script script : loadedScripts) {
@@ -105,8 +104,10 @@ public class Manager {
                     script.grow();
                 }
 
+                CollisionManager_Rect2D.getInstance().update();
                 Window.drawBackground();
                 Window.print();
+                
             }
         }
 

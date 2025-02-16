@@ -28,17 +28,22 @@ public class Window {
     public static SDL_Event evt = new SDL_Event();
     public static SDL_Renderer rd;
     private static SDL_Window window;
-    public static Vector2 position;
-    public static Vector2 scale;
+
+    public static String title = "Default Window";
+    public static Vector2 position = new Vector2(200,200);
+    public static Vector2 scale = new Vector2(640,480);
 
     private static Color backgroundColor = new Color(0, 0, 0, 0);
 
-    public static void create(String title, int x, int y, int w, int h) {
+    static {
         createSDLEnvironment();
-        window = createWindow(title, x, y, w, h, 4 | 32);
-        rd = createRenderer(window, -1, 2);
-        position = new Vector2(x, y);
-        scale = new Vector2(w, h);
+        updateWindow();
+    }
+
+    public static void updateWindow() {
+        end();
+        window = createWindow(title, (int)position.x, (int)position.y, (int)scale.x, (int)scale.y, 4 | 32);
+        rd = createRenderer(window, -1, 2 | 8);
     }
 
     private static void createSDLEnvironment() {
@@ -68,6 +73,10 @@ public class Window {
 
     public static void drawBackground() {
         SDL_SetRenderDrawColor(rd, backgroundColor.r, backgroundColor.g, backgroundColor.b,(byte) 255);
+    }
+
+    public static void drawRender(Color col) {
+        SDL_SetRenderDrawColor(rd, col.r, col.g, col.b,col.a);
     }
 
     public static void setBackgroundColor(Color color) {
