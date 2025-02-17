@@ -1,8 +1,6 @@
 package main.java.com.pws.dryadengine.core;
 
 import main.java.com.pws.dryadengine.func.LogsManager;
-import main.java.com.pws.dryadengine.func.Window;
-import main.java.com.pws.dryadengine.types.Color;
 import main.java.com.pws.dryadengine.types.Node;
 
 public class App {

@@ -12,6 +12,8 @@ public class CollisionManager_Rect2D {
     private QuadTree quadTree;
     private List<Rect2DCollider> colliders;
 
+    //TODO: add threading collision detection.
+
     private CollisionManager_Rect2D() {
         colliders = new ArrayList<>();
         quadTree = new QuadTree(0, 
@@ -19,7 +21,6 @@ public class CollisionManager_Rect2D {
             Window.scale
         );
     }
-
     
     public static CollisionManager_Rect2D getInstance() {
         if (instance == null) {

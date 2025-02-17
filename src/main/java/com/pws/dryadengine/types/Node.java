@@ -20,7 +20,7 @@ public class Node{
         this.scale = scale;
     }
 
-    public void addChild(Node child) {
+    public void addChild(Node child)  {
         if (child.parent != null) {
             child.parent.removeChild(child);
         }

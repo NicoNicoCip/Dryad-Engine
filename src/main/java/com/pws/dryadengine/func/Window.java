@@ -43,7 +43,7 @@ public class Window {
     public static void updateWindow() {
         end();
         window = createWindow(title, (int)position.x, (int)position.y, (int)scale.x, (int)scale.y, 4 | 32);
-        rd = createRenderer(window, -1, 2 | 8);
+        rd = createRenderer(window, 1, 2 | 8);
     }
 
     private static void createSDLEnvironment() {

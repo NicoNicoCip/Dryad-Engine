@@ -13,8 +13,11 @@ import main.java.com.pws.dryadengine.func.Window;
 import main.java.com.pws.dryadengine.physics.CollisionManager_Rect2D;
 import main.java.com.pws.dryadengine.types.Color;
 import main.java.com.pws.dryadengine.types.Vector2;
+import io.github.libsdl4j.api.hints.SDL_HintCallback;
+import io.github.libsdl4j.api.hints.SdlHints;
 
 public class Manager {
+    private static final String SDL_HINT_RENDER_DRIVER = "SDL_RENDER_DRIVER";
     private static List<Script> scripts = new ArrayList<>();
     private static boolean changeListFlag = false;
     private static int[] scriptExecution = new int[] {0};
@@ -65,11 +68,12 @@ public class Manager {
     }
 
     public static void create() throws Exception {
+
         // Initialize all scripts with PC values
         for (Script script : scripts) {
             script.setPC();
         }
-    
+
         // Sort scripts by PC value
         Collections.sort(scripts, Comparator.comparingInt(script -> script.pc));
         Window.title = "Test Platformer";
@@ -84,8 +88,8 @@ public class Manager {
             // Only add scripts that match the current execution order
             for (int pc : scriptExecution) {
                 scripts.stream()
-                      .filter(s -> s.pc == pc)
-                      .forEach(loadedScripts::add);
+                    .filter(s -> s.pc == pc)
+                    .forEach(loadedScripts::add);
             }
     
             // Plant phase

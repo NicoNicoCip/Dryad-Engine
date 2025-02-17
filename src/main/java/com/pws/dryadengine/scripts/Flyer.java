@@ -10,7 +10,6 @@ import main.java.com.pws.dryadengine.types.Camera;
 import main.java.com.pws.dryadengine.types.Color;
 import main.java.com.pws.dryadengine.types.Euler;
 import main.java.com.pws.dryadengine.types.Rect2D;
-import main.java.com.pws.dryadengine.types.Vector2;
 
 public class Flyer extends Script {
     @Override
