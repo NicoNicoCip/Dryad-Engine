@@ -26,4 +26,3 @@ public class Camera extends Node {
         root.position = root.position.follow(getViewOffset().toVector3(), amount);
     }
 }
-
