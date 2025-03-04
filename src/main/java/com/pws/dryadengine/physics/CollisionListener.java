@@ -1,4 +1,4 @@
-package main.java.com.pws.dryadengine.physics;
+package com.pws.dryadengine.physics;
 
 public interface CollisionListener {
     void onCollisionEnter(Rect2DCollider other);

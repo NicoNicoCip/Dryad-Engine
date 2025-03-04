@@ -1,4 +1,4 @@
-package main.java.com.pws.dryadengine.types;
+package com.pws.dryadengine.types;
 
 import java.util.ArrayList;
 import java.util.List;

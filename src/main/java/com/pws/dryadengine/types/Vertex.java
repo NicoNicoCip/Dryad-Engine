@@ -1,4 +1,4 @@
-package main.java.com.pws.dryadengine.types;
+package com.pws.dryadengine.types;
 
 import io.github.libsdl4j.api.render.SDL_Vertex;
 

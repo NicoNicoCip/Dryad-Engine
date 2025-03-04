@@ -1,9 +1,9 @@
-package main.java.com.pws.dryadengine.physics;
+package com.pws.dryadengine.physics;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.com.pws.dryadengine.types.Vector2;
+import com.pws.dryadengine.types.Vector2;
 
 public class QuadTree {
     private static final int MAX_OBJECTS = 10;

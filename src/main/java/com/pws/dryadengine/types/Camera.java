@@ -1,6 +1,6 @@
-package main.java.com.pws.dryadengine.types;
+package com.pws.dryadengine.types;
 
-import main.java.com.pws.dryadengine.func.Window;
+import com.pws.dryadengine.func.Window;
 
 public class Camera extends Node {
     public float zoom = 1.0f;

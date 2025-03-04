@@ -1,23 +1,23 @@
-package main.java.com.pws.dryadengine.scripts;
+package com.pws.dryadengine.scripts;
 
-import main.java.com.pws.dryadengine.core.App;
-import main.java.com.pws.dryadengine.core.scripts.Script;
-import main.java.com.pws.dryadengine.func.Input;
-import main.java.com.pws.dryadengine.func.Window;
-import main.java.com.pws.dryadengine.physics.CollisionListener;
-import main.java.com.pws.dryadengine.physics.Rect2DCollider;
-import main.java.com.pws.dryadengine.types.Camera;
-import main.java.com.pws.dryadengine.types.Color;
-import main.java.com.pws.dryadengine.types.Euler;
-import main.java.com.pws.dryadengine.types.Rect2D;
+import com.pws.dryadengine.core.App;
+import com.pws.dryadengine.core.scripts.Script;
+import com.pws.dryadengine.func.Input;
+import com.pws.dryadengine.func.Window;
+import com.pws.dryadengine.physics.Rect2DCollider;
+import com.pws.dryadengine.types.Camera;
+import com.pws.dryadengine.types.Color;
+import com.pws.dryadengine.types.Euler;
+import com.pws.dryadengine.types.Rect2D;
+import com.pws.dryadengine.physics.CollisionListener;
 
 public class Flyer extends Script {
     @Override
     public void setPC() {
         this.pc = 0;
     }
-
-    private final float moveSpeed = 0.5f;
+    
+     private final float moveSpeed = 0.05f;
     private Rect2D player = new Rect2D(0, 0, 50, 50, new Color(0, 0, 255, 255));
     private Rect2D ground = new Rect2D(0, 200, 1000, 300, new Color(120, 255, 120, 255));
     private Rect2D center;
@@ -38,6 +38,8 @@ public class Flyer extends Script {
         App.root.addChild(origin);
 
         player.addChild(collider1);
+        player.position.z = 1.0f;
+        player.rotation.setY(0.5f);
         ground.addChild(collider2);
 
         collider1.setCollisionListener(new CollisionListener() {
@@ -66,13 +68,13 @@ public class Flyer extends Script {
         if (Input.checkKey(Input._w,Input.State.held))      { player.position.y-= moveSpeed;}
         if (Input.checkKey(Input._s,Input.State.held))      { player.position.y+= moveSpeed;}
         
-        cam.updateLerped(0.05f);
+        cam.updateLerped(0.005f);
         player.updateRect();
         ground.updateRect();
         ground.rotation = new Euler(0, 0, 0.5f);
         center.updateRect(); 
         origin.updateRect();
-        spinner+= 0.005f;
+        spinner+= 0.05f;
         center.rotation = new Euler(0, 0, spinner);
     } 
 }

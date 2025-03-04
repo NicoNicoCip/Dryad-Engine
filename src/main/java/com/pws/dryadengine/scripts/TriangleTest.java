@@ -1,13 +1,13 @@
-package main.java.com.pws.dryadengine.scripts;
+package com.pws.dryadengine.scripts;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.com.pws.dryadengine.core.scripts.Script;
-import main.java.com.pws.dryadengine.types.Color;
-import main.java.com.pws.dryadengine.types.Mesh;
-import main.java.com.pws.dryadengine.types.Vector3;
-import main.java.com.pws.dryadengine.types.Vertex;
+import com.pws.dryadengine.core.scripts.Script;
+import com.pws.dryadengine.types.Color;
+import com.pws.dryadengine.types.Mesh;
+import com.pws.dryadengine.types.Vector3;
+import com.pws.dryadengine.types.Vertex;
 
 public class TriangleTest extends Script {
     List<Vertex> verts = new ArrayList<>();

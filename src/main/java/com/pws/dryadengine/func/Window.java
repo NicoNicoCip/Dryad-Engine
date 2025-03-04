@@ -1,11 +1,11 @@
-package main.java.com.pws.dryadengine.func;
+package com.pws.dryadengine.func;
 
 import io.github.libsdl4j.api.SdlSubSystemConst;
 import io.github.libsdl4j.api.event.SDL_Event;
 import io.github.libsdl4j.api.render.SDL_Renderer;
 import io.github.libsdl4j.api.video.SDL_Window;
 
-import main.java.com.pws.dryadengine.core.App;
+import com.pws.dryadengine.core.App;
 
 import static io.github.libsdl4j.api.Sdl.SDL_Init;
 import static io.github.libsdl4j.api.Sdl.SDL_Quit;
@@ -18,8 +18,8 @@ import static io.github.libsdl4j.api.video.SdlVideo.SDL_GetWindowSizeInPixels;
 
 import com.sun.jna.ptr.*;
 
-import main.java.com.pws.dryadengine.types.Color;
-import main.java.com.pws.dryadengine.types.Vector2;
+import com.pws.dryadengine.types.Color;
+import com.pws.dryadengine.types.Vector2;
 
 import static io.github.libsdl4j.api.event.SDL_EventType.*;
 import static io.github.libsdl4j.api.render.SdlRender.*;
@@ -49,7 +49,7 @@ public class Window {
     private static void createSDLEnvironment() {
         int result = SDL_Init(SdlSubSystemConst.SDL_INIT_EVERYTHING);
         if (result != 0) {
-            LogsManager.logErrors(new IllegalStateException("Unable to initialize SDL library (Error code " + result + "): " + SDL_GetError()));
+            Debug.logError(new IllegalStateException("Unable to initialize SDL library (Error code " + result + "): " + SDL_GetError()));
         }
     }
 
@@ -57,7 +57,7 @@ public class Window {
         //SDL_Window window = SDL_CreateWindow("Demo SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1024, 768, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
         SDL_Window window = SDL_CreateWindow(title, x, y, w, h, flags);
         if (window == null) {
-            LogsManager.logErrors( new IllegalStateException("Unable to create SDL window: " + SDL_GetError()));
+             Debug.logError(new IllegalStateException("Unable to create SDL window: " + SDL_GetError()));
         }
         return window;
     }
@@ -66,7 +66,7 @@ public class Window {
         //SDL_Renderer renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
         SDL_Renderer renderer = SDL_CreateRenderer(window, index, flags);
         if (renderer == null) {
-            LogsManager.logErrors( new IllegalStateException("Unable to create SDL renderer: " + SDL_GetError()));
+            Debug.logError( new IllegalStateException("Unable to create SDL renderer: " + SDL_GetError()));
         }
         return renderer;
     }

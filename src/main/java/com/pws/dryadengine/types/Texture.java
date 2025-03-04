@@ -1,4 +1,4 @@
-package main.java.com.pws.dryadengine.types;
+package com.pws.dryadengine.types;
 
 public class Texture {
     

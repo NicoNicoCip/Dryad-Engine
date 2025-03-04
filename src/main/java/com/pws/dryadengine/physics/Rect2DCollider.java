@@ -1,6 +1,6 @@
-package main.java.com.pws.dryadengine.physics;
+package com.pws.dryadengine.physics;
 
-import main.java.com.pws.dryadengine.types.*;
+import com.pws.dryadengine.types.*;
 
 public class Rect2DCollider extends Node {
     public boolean isColliding = false;

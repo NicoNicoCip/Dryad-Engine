@@ -1,15 +1,15 @@
-package main.java.com.pws.dryadengine.scripts;
+package com.pws.dryadengine.scripts;
 
-import main.java.com.pws.dryadengine.core.App;
-import main.java.com.pws.dryadengine.core.scripts.Script;
-import main.java.com.pws.dryadengine.func.Input;
-import main.java.com.pws.dryadengine.func.Window;
-import main.java.com.pws.dryadengine.physics.CollisionManager_Rect2D;
-import main.java.com.pws.dryadengine.physics.Rect2DCollider;
-import main.java.com.pws.dryadengine.types.Camera;
-import main.java.com.pws.dryadengine.types.Color;
-import main.java.com.pws.dryadengine.types.Node;
-import main.java.com.pws.dryadengine.types.Rect2D;
+import com.pws.dryadengine.core.App;
+import com.pws.dryadengine.core.scripts.Script;
+import com.pws.dryadengine.func.Input;
+import com.pws.dryadengine.func.Window;
+import com.pws.dryadengine.physics.CollisionManager_Rect2D;
+import com.pws.dryadengine.physics.Rect2DCollider;
+import com.pws.dryadengine.types.Camera;
+import com.pws.dryadengine.types.Color;
+import com.pws.dryadengine.types.Node;
+import com.pws.dryadengine.types.Rect2D;
 
 public class Platformer extends Script {
 

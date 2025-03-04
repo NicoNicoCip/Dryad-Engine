@@ -1,4 +1,4 @@
-package main.java.com.pws.dryadengine.func;
+package com.pws.dryadengine.func;
 
 import java.util.HashMap;
 

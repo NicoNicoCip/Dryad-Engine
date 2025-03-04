@@ -1,9 +1,9 @@
-package main.java.com.pws.dryadengine.physics;
+package com.pws.dryadengine.physics;
 
 import java.util.List;
 
-import main.java.com.pws.dryadengine.func.Window;
-import main.java.com.pws.dryadengine.types.Vector2;
+import com.pws.dryadengine.func.Window;
+import com.pws.dryadengine.types.Vector2;
 
 import java.util.ArrayList;
 

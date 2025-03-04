@@ -1,4 +1,4 @@
-package main.java.com.pws.dryadengine.func;
+package com.pws.dryadengine.func;
 
 import static io.github.libsdl4j.api.keycode.SdlKeycode.SDL_SCANCODE_TO_KEYCODE;
 import static io.github.libsdl4j.api.scancode.SDL_Scancode.*;

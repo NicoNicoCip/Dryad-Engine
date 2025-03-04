@@ -18,9 +18,9 @@
     <!-- Custom directory properties -->
     <custom.source.directory>src/main/java</custom.source.directory>
     <custom.resources.directory>data</custom.resources.directory>
-    <custom.test.directory>src/tests/java</custom.test.directory>
-    <custom.test.resources.directory>src/tests/data</custom.test.resources.directory>
-    <custom.output.directory>bin</custom.output.directory>
+    <custom.test.directory>src/main/java/tests</custom.test.directory>
+    <custom.test.resources.directory>data/tests</custom.test.resources.directory>
+    <custom.output.directory>mavenbin</custom.output.directory>
     <custom.library.directory>lib</custom.library.directory>
   </properties>
 
@@ -33,9 +33,21 @@
     </dependency>
 
     <dependency>
+      <groupId>org.jline</groupId>
+      <artifactId>jline</artifactId>
+      <version>3.21.0</version>
+    </dependency>
+
+    <dependency>
       <groupId>io.github.libsdl4j</groupId>
       <artifactId>libsdl4j</artifactId>
       <version>2.28.4-1.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.googlecode.lanterna</groupId>
+      <artifactId>lanterna</artifactId>
+      <version>3.1.1</version>
     </dependency>
   </dependencies>
 
@@ -128,6 +140,19 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.2.2</version>
+          <configuration>
+              <archive>
+                  <manifest>
+                      <mainClass>com.pws.dryadengine.core.App</mainClass>
+                  </manifest>
+              </archive>
+          </configuration>
       </plugin>
     </plugins>
   </build>

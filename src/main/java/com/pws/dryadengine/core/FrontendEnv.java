@@ -1,16 +1,18 @@
-package main.java.com.pws.dryadengine.core;
+package com.pws.dryadengine.core;
 
-import main.java.com.pws.dryadengine.core.scripts.Manager;
+import com.pws.dryadengine.func.Debug;
 
 public class FrontendEnv implements Runnable {
+  private static byte run = 0;
 
-    @Override
-    public void run() {
-        try {
-            Manager.create();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
+  @Override
+  public void run() {
+    if(run == 1) {
+      try {
+        App.scriptMan.create();
+      } catch (Exception e) {
+        Debug.logError(e);
+      }
     }
+  }
 }

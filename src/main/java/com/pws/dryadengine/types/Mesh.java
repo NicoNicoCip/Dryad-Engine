@@ -1,4 +1,4 @@
-package main.java.com.pws.dryadengine.types;
+package com.pws.dryadengine.types;
 
 import static io.github.libsdl4j.api.render.SdlRender.SDL_RenderGeometry;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.libsdl4j.api.render.SDL_Vertex;
-import main.java.com.pws.dryadengine.func.Window;
+import com.pws.dryadengine.func.Window;
 
 public class Mesh extends Node{
     List<SDL_Vertex> sdlverts = new ArrayList<>();
