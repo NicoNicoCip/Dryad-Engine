@@ -1,8 +1,11 @@
 package com.pws.dryadengine.commands;
 
 import java.lang.reflect.Array;
+import java.net.SocketAddress;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.pws.dryadengine.core.App;
 import com.pws.dryadengine.core.commands.Command;
@@ -82,12 +85,20 @@ public class CMHelp extends Command {
       return true;
     }
 
-    for (short i = 1; i < args.length; i++) {
-      if(App.commandMan.getOneCommand(args[i]) == null) {
-        Debug.print("Command \"" + args[i] + "\" not found.");
+    Set<String> soccargs = new HashSet<>();
+    soccargs.addAll(Arrays.asList(args));
+    Object[] finalArgs = soccargs.toArray();
+
+    for (short i = 0; i < finalArgs.length; i++) {
+      if(App.commandMan.getOneCommand(finalArgs[i].toString()) == null) {
+        Debug.print("Command \"" + finalArgs[i] + "\" not found.");
         continue;
       }
-      App.commandMan.getOneCommand(args[i]).getHelp().print();
+
+      App.commandMan.getOneCommand(finalArgs[i].toString()).getHelp().print();
+
+      if(i != finalArgs.length - 1)
+          Debug.println("");
     }
     return true;
   }

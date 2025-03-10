@@ -17,7 +17,6 @@ public class CMSys extends Command {
   public void setOptions() {
     this.options = new String[] {
         "clear",
-        "restart",
         "exit"
     };
   }
@@ -25,7 +24,6 @@ public class CMSys extends Command {
   @Override
   public void construct() {
     registerOptions((args) -> sysClear(), "clear");
-    registerOptions((args) -> sysRestart(), "restart");
     registerOptions((args) -> sysExit(), "exit");
   }
 
@@ -35,39 +33,23 @@ public class CMSys extends Command {
       Debug.print("No subcommand present.");
       return false;
     }
+    
     runOptions(args);
     return true;
   }
 
   public void sysClear() {
-    Debug.out("\033[2J\033[HCleared! ");
-    Debug.log("Cleared the screen.");
-  }
-
-  public void sysRestart() {
-    // First close your threads gracefully
-    App.backend.interrupt();
-    App.frontend.interrupt();
-    
     try {
-      // Wait for threads to finish
-      App.backend.join();
-      App.frontend.join();
-
-      // Restart the application using ProcessBuilder
-      ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", "start", "BuildAndRun.bat");
-      processBuilder.directory(new File(System.getProperty("user.dir")));
-      Process process = processBuilder.start();
+      new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
     } catch (Exception e) {
       Debug.logError(e);
     }
-
-    // Exit current JVM instance
-    System.exit(0);
+    Debug.print("--------------- Cleared the screen ------------------");
   }
 
   public void sysExit() {
     App.finnishExecution = true;
+    Debug.print("If you're seeing this then you can either press Enter to restart the engine, or re-run the proper batch.");
   }
 
   @Override
@@ -80,11 +62,9 @@ public class CMSys extends Command {
             "to be given as a parameter to do something.",
         Arrays.asList(
             "clear",
-            "restart",
             "exit"),
         Arrays.asList(
             "clears the terminal",
-            "restarts the current process.",
             "exits the current terminal porcess."),
         "More auxiliary commands comming soon.",
         "Finn Willow",

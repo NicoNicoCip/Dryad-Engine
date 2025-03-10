@@ -49,10 +49,10 @@ public class CMEcho extends Command {
             Debug.print("Nothing to log after --log command at part " + i + ".");
           break;
         case "-m":
-          App.commandMan.multiline = true;
+          Debug.print("Unimplemented.");
           break;
         case "--multiline":
-          App.commandMan.multiline = true;
+          Debug.print("Unimplemented.");
           break;
         case "-h":
           this.help.print();
@@ -96,7 +96,7 @@ public class CMEcho extends Command {
             "the arguments for the echo can be anywhere after the first line, that HAS to be \"echo\". the text then will be printed as is."
                 +
                 "Note that each space character is regarded as a separated echo command, and will be printed on its own line.",
-            "text placed between the doublequotes will transform the characters inside into their respective escape codes. "
+            "text placed between the doublequotes will transform the characters inside into their respective escape codes. For example "
                 +
                 "\\n will become a new line, \\t wil become a tab, and so on.",
             "text paced between the singlequotes will be taken as literals. \\n will stay \\n, and be printed as such.",

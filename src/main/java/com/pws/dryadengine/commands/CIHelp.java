@@ -14,6 +14,25 @@ public class CIHelp {
     helpText = text;
   }
 
+  /* intro is just the command and nothing more
+   * 
+   * under name is the brief description of the command
+   *
+   * under synopsis you get a brief explaination on the composing parts of the command
+   *
+   * under description you get brief descriptions on each part of the command and its
+   *
+   * then author of the command
+   *
+   * a page to report bugs
+   *
+   * copyright 
+   *    Copyright © 2023 Free Software Foundation, Inc.  License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+   *    This is free software: you are free to change and redistribute it.  There is NO WARRANTY, to the extent permitted by law.
+   *
+   * theres also a "see also".
+   */
+
   public CIHelp(String intro, String name, String name_info, String synopsis, List<String> desc_elements, 
     List<String> desc_info, String desc_footer, String author, String license) {
     StringBuilder buffer = new StringBuilder();

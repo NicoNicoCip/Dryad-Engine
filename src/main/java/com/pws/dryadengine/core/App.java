@@ -23,7 +23,7 @@ public class App {
       backend.start();
       frontend.start();
       while (true) {
-        if(finnishExecution){
+        if (finnishExecution) {
           System.exit(0);
           backend.join();
           frontend.join();
