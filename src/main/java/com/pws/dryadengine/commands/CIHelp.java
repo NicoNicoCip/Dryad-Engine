@@ -19,7 +19,7 @@ public class CIHelp {
     StringBuilder buffer = new StringBuilder();
     buffer.append("[START - " + name + "]\n");
     buffer.append(intro + "\n\n");
-    
+
     buffer.append("[NAME]\n");
     buffer.append("  " + name + " " + name_info + "\n\n");
     

@@ -15,6 +15,7 @@ import org.jline.utils.NonBlockingReader;
 
 // packaged
 import com.pws.dryadengine.core.App;
+import com.pws.dryadengine.func.Await;
 import com.pws.dryadengine.func.ClassHook;
 import com.pws.dryadengine.func.Debug;
 import com.pws.dryadengine.func.FileManager;
@@ -36,14 +37,15 @@ public class CommandManager extends ClassHook<Command> {
   private boolean historyView = false;
 
   public String lineInfo = ">> ";
+  public boolean multiline = false;
 
   private Terminal term;
-  private NonBlockingReader reader;
+  public NonBlockingReader reader;
   private File commandHistory;
 
   private void initHistorial() {
-    commandHistory = FileManager.createFile(App.saveFileFolder + "commandHistory.txt");
-    FileManager.writeToFile(commandHistory, " ", true);
+    commandHistory = FileManager.createFile(App.saveFileFolder + ".commandHistory");
+    FileManager.updateFile(commandHistory, "", true);
   }
 
   public CommandManager() {
@@ -67,6 +69,20 @@ public class CommandManager extends ClassHook<Command> {
     return new ArrayList<>(commands.values());
   }
 
+  public void create() throws Exception {
+    term = TerminalBuilder.builder().system(true).jna(true).build();
+    reader = term.reader();
+
+    initHistorial();
+    Await.signal(commandHistory != null && commandHistory.exists());
+    line = FileManager.readLines(commandHistory, "\n\u001F").length;
+
+    updateWritten();
+    while (!App.finnishExecution) {
+      inputs();
+    }
+  }
+
   /**
    * Helper function for running a command trough code<br>
    * <br>
@@ -80,17 +96,30 @@ public class CommandManager extends ClassHook<Command> {
    */
   public void runCommand(String command) {
     System.out.println();
+
+    Debug.log(lineInfo + command + "\n");
+
+    if (command.length() <= 0) {
+      return;
+    }
+
     String[] args = breakApart(command);
-    FileManager.writeToFile(commandHistory, "\n" + command, true);
+    if(!FileManager.readLines(commandHistory, "\n\u001F")[line-1].replace("\n\u001F", "").equals(command)) {
+      FileManager.updateFile(commandHistory, "\n\u001F" + command, true);
+      line++;
+    }
 
     if (commands.containsKey(args[0]))
-      commands.get(args[0]).run(Arrays.copyOfRange(args, 0, args.length));
+      commands.get(args[0]).run(Arrays.copyOfRange(args, 1, args.length));
     else
-      Debug.println("Command not found.");
+      Debug.print("Command not found.");
 
-    System.out.println();
-    buffer.setLength(0);
-    cursor = 0;
+    if (!multiline) {
+      System.out.println();
+      Debug.log("\n");
+      buffer.setLength(0);
+      cursor = 0;
+    }
   }
 
   // function responsible for detecting the inputs from the keyboard and doing
@@ -100,6 +129,13 @@ public class CommandManager extends ClassHook<Command> {
     int input = reader.read(1);
     if (input == -2)
       return;
+
+    if (input == 24) { // CTRL+X (multiline toggle)
+      if (multiline) {
+        multiline = false;
+        input = '\n'; // Simulate enter key press to process the input
+      }
+    }
 
     // BACKSPACE
     if (input == 8) {
@@ -116,21 +152,35 @@ public class CommandManager extends ClassHook<Command> {
         // UP DOWN RIGHT LEFT
         switch (next2) {
           case 65:
-            if (line > 1) {
-              line--;
-              historyView = true;
+            if (multiline) {
+              int prevLineStart = buffer.lastIndexOf("\n", cursor - 1);
+              if (prevLineStart != -1) {
+                cursor = prevLineStart;
+              }
+            } else {
+              if (line > 1) {
+                line--;
+                historyView = true;
+              }
             }
             break;
 
           case 66:
-            if (line < FileManager.readLines(commandHistory).length - 1) {
-              line++;
-              historyView = true;
+            if (multiline) {
+              int nextLineStart = buffer.indexOf("\n", cursor + 1);
+              if (nextLineStart != -1) {
+                cursor = nextLineStart + 1;
+              }
             } else {
-              historyView = false;
-              int repeat = FileManager.readLines(commandHistory)[line - 1].length();
-              buffer.setLength(0);
-              cursor = 0;
+              if (line < FileManager.readLines(commandHistory, "\n\u001F").length - 1) {
+                line++;
+                historyView = true;
+              } else if (line == FileManager.readLines(commandHistory, "\n\u001F").length - 1) {
+                line++;
+                historyView = false;
+                buffer.setLength(0);
+                cursor = 0;
+              }
             }
             break;
           // RIGHT
@@ -149,18 +199,26 @@ public class CommandManager extends ClassHook<Command> {
     }
     // ENTER
     else if (input == '\r' || input == '\n') {
-      line++;
-      runCommand(buffer.toString());
+      if (multiline) {
+        buffer.insert(cursor, '\n');
+        cursor++;
+      } else {
+        runCommand(buffer.toString());
+        line = FileManager.readLines(commandHistory, "\n\u001F").length;
+      }
     }
     // REST OF CHARACTERS.
     else {
       char c = (char) input;
       buffer.insert(cursor, c);
       cursor++;
-      line = FileManager.readLines(commandHistory).length;
+      line = FileManager.readLines(commandHistory, "\n\u001F").length;
       historyView = false;
     }
 
+    if (multiline) {
+      cursor = Math.max(0, Math.min(cursor, buffer.length()));
+    }
     // updatign the screen if something actually changed.
     updateWritten();
   }
@@ -288,40 +346,42 @@ public class CommandManager extends ClassHook<Command> {
   // update the line that has prints and updated the line with the string thats
   // being written to currently.
   private void updateWritten() {
+    if (multiline) {
+      updateMultilineBuffer(buffer.toString());
+      System.out.print("\033[" + (cursor + 1) + "G");
+      System.out.flush();
+      return;
+    }
+
     if (historyView) {
-      buffer = new StringBuffer(FileManager.readLines(commandHistory)[line]);
+      buffer = new StringBuffer(FileManager.readLines(commandHistory, "\n\u001F")[line]);
       // Set cursor at the end of the buffer
-      cursor = buffer.length();
+      cursor = buffer.length(); 
       historyView = false;
     }
 
     // Print the line info and current buffer.
-    String out = "\r" + lineInfo + buffer.toString();
-    System.out.print(out);
-
-    // Clear from the current cursor position to the end of the line.
+    System.out.print("\r" + lineInfo + buffer.toString());
     System.out.print("\033[K");
-
-    // Move the cursor to the correct position:
-    // (cursor + lineInfo.length() + 1) calculates the column.
     System.out.print("\033[" + (cursor + lineInfo.length() + 1) + "G");
-
     System.out.flush();
   }
 
-  public void create() throws Exception {
-    term = TerminalBuilder.builder().system(true).jna(true).build();
-    reader = term.reader();
+  public void updateMultilineBuffer(String buffer) {
+    int lines = buffer.split("\n").length;
 
-    initHistorial();
-    while (commandHistory == null && !commandHistory.exists()) {
+    // Move cursor up by the number of lines in the buffer
+    for (int i = 1; i < lines; i++) {
+      System.out.print("\033[F"); // Move up one line
     }
-    line = FileManager.readLines(commandHistory).length;
 
-    updateWritten();
-    while (!App.finnishExecution) {
-      inputs();
-      App.backend.sleep(10);
+    // Clear the current lines by overwriting with spaces
+    for (int i = 0; i < lines; i++) {
+      System.out.print("\r\033[K"); // Move to start of line and clear it
     }
+
+    // Print the updated buffer in place
+    System.out.print(buffer);
   }
+
 }
