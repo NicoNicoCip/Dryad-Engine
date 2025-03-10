@@ -152,6 +152,7 @@ public abstract class Command {
   protected void registerOptions(CommandFunction handler, String ... options) {
      Arrays.asList(options).forEach(opt -> optionHandlers.put(opt, handler));
   }
+
   /**
    * Utility funciton that runs the option's assigned command.
    * @param option the option to be ran.
@@ -163,6 +164,16 @@ public abstract class Command {
       handler.execute(args);
     } else {
       Debug.println("Option not found: " + option);
+    }
+  }
+
+  /**
+   * Utility function that finds and runs all the options registered in the command
+   */
+  protected void runOptions(String[] args) {
+    String[] filtered = matching(getOptions(), args);
+    for (String option : filtered) {
+      executeOption(option, args);
     }
   }
 

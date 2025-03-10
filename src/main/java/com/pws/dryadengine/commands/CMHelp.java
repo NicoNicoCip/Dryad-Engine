@@ -1,5 +1,6 @@
 package com.pws.dryadengine.commands;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,9 +45,10 @@ public class CMHelp extends Command {
 
   public void helpFull() {
     List<Command> com = App.commandMan.getCommands();
-    for (short i = 0; i < com.size(); i++) {
+    int comSize = com.size();
+    for (short i = 0; i < comSize; i++) {
       Debug.print(com.get(i).getCommand() + "\t");
-      helpCommandOptions(new String[] {"help", "-o" ,com.get(i).getCommand()});
+      helpCommandOptions(new String[] {"-o" ,com.get(i).getCommand()});
       Debug.print(i == com.size()-1? "" : "\n");
     }
     hasOption = true;
@@ -61,13 +63,13 @@ public class CMHelp extends Command {
   }
 
   public void helpCommandOptions(String[] args) {
-    if(args.length != 3) {
+    if(args.length != 2) {
       Debug.print("Wrong number of arguments. The sintaxis is \"help + -o or --options + command\" and nothing more.");
       hasOption = true;
       return;
     }
 
-    for (String opt : App.commandMan.getOneCommand(args[2]).getOptions()) {
+    for (String opt : App.commandMan.getOneCommand(args[1]).getOptions()) {
       Debug.print(opt + "\t");
     }
 
@@ -75,12 +77,12 @@ public class CMHelp extends Command {
   }
 
   public boolean help(String[] args) {
-    if(args.length == 1) {
+    if(args.length == 0) {
       this.help.print();
       return true;
     }
 
-    for (byte i = 1; i < args.length; i++) {
+    for (short i = 1; i < args.length; i++) {
       if(App.commandMan.getOneCommand(args[i]) == null) {
         Debug.print("Command \"" + args[i] + "\" not found.");
         continue;
@@ -92,27 +94,26 @@ public class CMHelp extends Command {
 
   @Override
   public void setHelp() {
-    String text = """
-      [STARTOFHELP - help]           
-      .  help [--option/s] (String ... argumnets)
-      .
-      .  [NAME]
-      .     help -- a usefull command for informing yourself on any command you want.
-      .
-      .  [SYNOPSIS]
-      .     "help" has one or more options that can be put anywhere, and that help with specifying what kind of help you
-      .     want to see. note, that options for this command are blocking, and any command after the option (excluding 
-      .     redirecting and pipes) will not be ran. if written on its own, prints this text, and will print the help text
-      .     of all the arguments after.
-      .
-      .  [DESCRIOPTION]
-      .    help             |> prints this text when alone, and prints all the helps of all the specified commands, when not. 
-      .    -a or --all      |> prints all the helps of all the commands curently installed.
-      .    -c or --commands |> prints all of the commands on their own in a line.
-      . 
-      .  [AUTHOR]
-      .    Finn Willow
-      [ENDOFHELP]""";
-    this.help = new CIHelp(text);
+    this.help = new CIHelp(
+      "help [options]", 
+      "help", "-- [option for type of help or nothing for this text]", 
+      "a command that lets you see any help text of any command, or if you dont know something about a command you can " +
+      "use one of the options.",
+        Arrays.asList(
+          "help",
+          "-f or --full",
+          "-c or --commands",
+          "-o or --options"
+        ),
+        Arrays.asList(
+          "prints this text if no arguments given, or prints the help of the command or commands given.",
+          "prints all the commands and the options they have.",
+          "prints the commands installed in the engine.",
+          "prints just the options of the given command."
+        ),
+      "",
+      "Finn Willow",
+      "FOSS (Temporary)"
+        );
   }
 }
