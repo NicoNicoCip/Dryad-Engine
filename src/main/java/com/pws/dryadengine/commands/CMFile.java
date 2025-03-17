@@ -10,12 +10,8 @@ import com.pws.dryadengine.func.FileManager;
 
 public class CMFile extends Command {
   @Override
-  public void setCommand() {
+  public void construct() {
     this.command = "file";
-  }
-
-  @Override
-  public void setOptions() {
     this.options = new String[] {
         "-c", "--create",
         "-d", "--delete",
@@ -25,10 +21,6 @@ public class CMFile extends Command {
         "-p", "--permisions",
         "-h", "--help"
     };
-  }
-
-  @Override
-  public void construct() {
     registerOptions((args) -> fileCreate(args), "-c", "--create");
     registerOptions((args) -> fileDelete(args), "-d", "--delete");
     registerOptions((args) -> fileJab(args), "-j", "--jab");

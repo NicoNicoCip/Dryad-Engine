@@ -43,7 +43,7 @@ public class CommandManager extends ClassHook<Command> {
   private File commandHistory;
 
   private void initHistorial() {
-    commandHistory = FileManager.createFile(App.saveFileFolder + ".commandHistory");
+    commandHistory = FileManager.createFile(App.systemDataFolder + "/.commandHistory");
     FileManager.updateFile(commandHistory, "", true);
   }
 
@@ -53,8 +53,6 @@ public class CommandManager extends ClassHook<Command> {
 
   @Override
   public void runOn(Command cmmfunc) {
-    cmmfunc.setCommand();
-    cmmfunc.setOptions();
     cmmfunc.setHelp();
     cmmfunc.construct();
     commands.put(cmmfunc.getCommand(), cmmfunc);

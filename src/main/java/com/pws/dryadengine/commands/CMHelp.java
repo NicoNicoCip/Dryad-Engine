@@ -14,21 +14,13 @@ import com.pws.dryadengine.func.Debug;
 public class CMHelp extends Command {
   private boolean hasOption = false;
   @Override
-  public void setCommand() {
+  public void construct() {
     command = "help";
-  }
-
-  @Override
-  public void setOptions() {
     options = new String[] {
       "-f", "--full",
       "-c", "--commands",
       "-o", "--options",
     };
-  }
-
-  @Override
-  public void construct() {
     registerOptions((args) -> helpFull(),"-f","--full");
     registerOptions((args) -> helpAllCommands(),"-c","--commands");
     registerOptions((args) -> helpCommandOptions(args), "-o", "--options");
@@ -69,6 +61,10 @@ public class CMHelp extends Command {
     if(args.length != 2) {
       Debug.print("Wrong number of arguments. The sintaxis is \"help + -o or --options + command\" and nothing more.");
       hasOption = true;
+      return;
+    } else if(!args[0].equals("-o") && !args[0].equals("--options")) {
+      hasOption = true;
+      Debug.print("Wrong order of command. The fist argument is the option, and then its the command.");
       return;
     }
 

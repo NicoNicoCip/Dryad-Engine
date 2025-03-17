@@ -24,3 +24,10 @@ hs_err_pid*
 replay_pid*
 data/saves/.commandHistory
 mavenbin/classes/saves/.commandHistory
+data/saves/commandHistory.txt
+data/system/.commandHistory
+mavenbin/classes/system.class_index
+mavenbin/classes/system/.class_index
+mavenbin/classes/system/.commandHistory
+mavenbin/classes/system/.hookJaw
+data/saves/commandHistory.txt

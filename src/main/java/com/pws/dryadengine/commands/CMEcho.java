@@ -7,23 +7,14 @@ import com.pws.dryadengine.core.App;
 import com.pws.dryadengine.core.commands.Command;
 
 public class CMEcho extends Command {
-
   @Override
-  public void setCommand() {
+  public void construct() {
     this.command = "echo";
-  }
-
-  @Override
-  public void setOptions() {
     this.options = new String[] {
         "-l", "--log",
         "-h", "--help",
         "-m", "--multiline"
     };
-  }
-
-  @Override
-  public void construct() {
   }
 
   @Override

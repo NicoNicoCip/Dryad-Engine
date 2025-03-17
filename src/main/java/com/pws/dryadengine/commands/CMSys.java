@@ -9,20 +9,12 @@ import com.pws.dryadengine.func.Debug;
 
 public class CMSys extends Command {
   @Override
-  public void setCommand() {
+  public void construct() {
     this.command = "sys";
-  }
-
-  @Override
-  public void setOptions() {
     this.options = new String[] {
         "clear",
         "exit"
     };
-  }
-
-  @Override
-  public void construct() {
     registerOptions((args) -> sysClear(), "clear");
     registerOptions((args) -> sysExit(), "exit");
   }

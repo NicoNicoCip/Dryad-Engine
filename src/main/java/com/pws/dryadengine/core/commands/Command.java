@@ -32,31 +32,6 @@ public abstract class Command {
   }
   
   protected Map<String, CommandFunction> optionHandlers = new HashMap<>();
-  
-  /**
-   * Used in the asignation step of the CommandManager class hook,<br>
-   * in setting the identifier of the command.<br>
-   * <br>
-   * Implement:<br>
-   * <pre>this.command = "my-command";</pre>
-   * Dont use spaces or quotes, not even backslash + space!
-   */
-  public abstract void setCommand();
-
-  /**
-   * Used in the asignation step of the CommandManager class hook,<br>
-   * in setting the options for the command.<br>
-   * <br>
-   * Implement:
-   * <pre>
-   * this.options = new String[] {
-   * // place opions here, idealy like this:
-   * "-o1", "--option1",
-   * "-o2", "--option2"
-   * };
-   * </pre>
-   */
-  public abstract void setOptions();
 
   /**
    * Used in the asignation step of the CommandManager class hook,<br>
