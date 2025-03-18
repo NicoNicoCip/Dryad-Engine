@@ -1,0 +1,13 @@
+[.bow, C:\Repos\Java\Dryad-Engine\data\system\.bow, 2025-03-18T10:02:16.9146924Z, 2025-03-18T10:02:16.9146924Z, 0 bytes][META-END]
+
+alias (clear) {
+  sys clear
+};
+
+alias (exit) {
+  sys exit
+};
+
+alias (us) {
+  echo "YOU SUCK!"
+};

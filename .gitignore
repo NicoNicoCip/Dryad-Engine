@@ -31,3 +31,5 @@ mavenbin/classes/system/.class_index
 mavenbin/classes/system/.commandHistory
 mavenbin/classes/system/.hookJaw
 data/saves/commandHistory.txt
+mavenbin/classes/saves/.commandHistory
+/mavenbin
