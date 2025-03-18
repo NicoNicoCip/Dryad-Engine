@@ -9,5 +9,6 @@ alias (exit) {
 };
 
 alias (us) {
-  echo "YOU SUCK!"
+  echo "YOU SUCK!\n"
+  echo "NO U."
 };

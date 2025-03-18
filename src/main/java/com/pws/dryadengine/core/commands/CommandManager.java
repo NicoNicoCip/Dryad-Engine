@@ -51,9 +51,12 @@ public class CommandManager extends ClassHook<Command> {
 
     String[] parts = FileManager.readLines(bow, ";");
     for (String func : parts) {
-      String alias = "alias" + StringUtils.getBetween(func, "alias", "}").replaceAll("\n", "") + "}";
+      String alias = "alias" + StringUtils.getBetween(func, "alias", "}") + "}";
       String aName = StringUtils.getBetween(alias, "(", ")").trim();
-      String aBody = StringUtils.getBetween(alias, "{", "}").replaceAll("\n", "");
+      String aBody = StringUtils.getBetween(alias, "{", "}");
+      // Debug.println("ALIAS: " + alias);
+      // Debug.println("ANAME: " + aName);
+      // Debug.println("ABODY: " + aBody);
       aliases.put(aName, aBody);
     }
   }
@@ -118,8 +121,12 @@ public class CommandManager extends ClassHook<Command> {
     }
 
     if (aliases.containsKey(args[0])) {
-      String[] com = StringUtils.breakApart(aliases.get(args[0]));
-      commands.get(com[0]).run(Arrays.copyOfRange(com, 1, com.length));
+      String[] parts = aliases.get(args[0]).split("\n");
+      for(String par : parts) {
+        if(par.equals("")) continue;
+        String[] com = StringUtils.breakApart(par);
+        commands.get(com[0]).run(Arrays.copyOfRange(com, 1, com.length));
+      }
     } else if (commands.containsKey(args[0]))
       commands.get(args[0]).run(Arrays.copyOfRange(args, 1, args.length));
     else

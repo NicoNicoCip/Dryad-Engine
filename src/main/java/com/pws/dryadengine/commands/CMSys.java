@@ -36,12 +36,12 @@ public class CMSys extends Command {
     } catch (Exception e) {
       Debug.logError(e);
     }
-    Debug.print("--------------- Cleared the screen ------------------");
+    Debug.print("Cleared.");
   }
 
   public void sysExit() {
     App.finnishExecution = true;
-    Debug.print("If you're seeing this then you can either press Enter to restart the engine, or re-run the proper batch.");
+    Debug.out("Exiting...");
   }
 
   @Override
