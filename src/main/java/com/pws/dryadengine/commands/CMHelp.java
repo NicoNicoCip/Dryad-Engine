@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.pws.dryadengine.core.App;
-import com.pws.dryadengine.core.commands.Command;
+import com.pws.dryadengine.core.shell.Command;
 import com.pws.dryadengine.func.Debug;
 
 public class CMHelp extends Command {

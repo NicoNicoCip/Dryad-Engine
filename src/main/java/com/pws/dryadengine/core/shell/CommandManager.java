@@ -1,4 +1,4 @@
-package com.pws.dryadengine.core.commands;
+package com.pws.dryadengine.core.shell;
 
 import java.io.File;
 // internal

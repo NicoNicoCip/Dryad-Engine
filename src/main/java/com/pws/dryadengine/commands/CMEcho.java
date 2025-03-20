@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import com.pws.dryadengine.func.Debug;
 import com.pws.dryadengine.core.App;
-import com.pws.dryadengine.core.commands.Command;
+import com.pws.dryadengine.core.shell.Command;
 
 public class CMEcho extends Command {
   @Override

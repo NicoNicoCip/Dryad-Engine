@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
-import com.pws.dryadengine.core.commands.Command;
+import com.pws.dryadengine.core.shell.Command;
 import com.pws.dryadengine.func.Debug;
 
 /**
@@ -27,12 +27,13 @@ public class CMThreadInfo extends Command {
     private boolean sortByName = false;
     private boolean showHelp = false;
 
-    public CMThreadInfo() {
+    @Override
+    public void construct() {
         this.command = "threads";
         this.options = new String[]{
             "-h", "--help",
             "-a", "--all",
-            "-r", "--active",
+            "-e", "--enabled",
             "-b", "--blocked",
             "-w", "--waiting",
             "-t", "--timed",
@@ -40,8 +41,20 @@ public class CMThreadInfo extends Command {
             "-s", "--stack",
             "-n", "--sort"
         };
-        setHelp();
-        construct();
+        // Help option
+        registerOptions((args) -> showHelp = true, "-h", "--help");
+        
+        // Thread filtering options
+        registerOptions((args) -> showAll = true, "-a", "--all");
+        registerOptions((args) -> showActive = true, "-e", "--enabled");
+        registerOptions((args) -> showBlocked = true, "-b", "--blocked");
+        registerOptions((args) -> showWaiting = true, "-w", "--waiting");
+        registerOptions((args) -> showTimedWaiting = true, "-t", "--timed");
+        
+        // Additional information options
+        registerOptions((args) -> showCpuTime = true, "-c", "--cpu");
+        registerOptions((args) -> showStackTrace = true, "-s", "--stack");
+        registerOptions((args) -> sortByName = true, "-n", "--sort");
     }
 
     @Override
@@ -82,25 +95,7 @@ public class CMThreadInfo extends Command {
           " There is NO WARRANTY, to the extent permitted by law.";
         
         this.help = new CIHelp(intro, name, nameInfo, synopsis, descElements, descInfo, descFooter, author, license);
-    }
-
-    @Override
-    public void construct() {
-        // Help option
-        registerOptions((args) -> showHelp = true, "-h", "--help");
-        
-        // Thread filtering options
-        registerOptions((args) -> showAll = true, "-a", "--all");
-        registerOptions((args) -> showActive = true, "-r", "--active");
-        registerOptions((args) -> showBlocked = true, "-b", "--blocked");
-        registerOptions((args) -> showWaiting = true, "-w", "--waiting");
-        registerOptions((args) -> showTimedWaiting = true, "-t", "--timed");
-        
-        // Additional information options
-        registerOptions((args) -> showCpuTime = true, "-c", "--cpu");
-        registerOptions((args) -> showStackTrace = true, "-s", "--stack");
-        registerOptions((args) -> sortByName = true, "-n", "--sort");
-    }
+    } 
 
     @Override
     public boolean run(String[] args) {
